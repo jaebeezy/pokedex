@@ -1,20 +1,43 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-import styled from "styled-components";
+import PokemonInfo from "./PokemonInfo";
 
-const Card = styled.div`
-  max-width: 200px;
-  max-height: 200px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
+import axios from "axios";
+
+import { Card } from "./styles/components";
+
+// using lodash for startCase method (uppercasing first letter and removing punctuation)
+var _ = require("lodash");
 
 const Pokemon = ({ name, url, image }) => {
+  const [loading, setLoading] = useState(false);
+  const [hidden, setHidden] = useState(true);
+  const [pokemonData, setPokemonData] = useState([]);
+
+  // get request for specific info on pokemon clicked
+  const fetchPokemonData = async () => {
+    setPokemonData([]);
+    try {
+      const response = await axios.get(url);
+      console.log(response.data);
+      setPokemonData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // handling hidden components
+  const handleClickHidden = () => {
+    setHidden(!hidden);
+  };
+
   return (
-    <Card onClick={() => console.log(name)}>
-      <img src={image} alt={`${name}`} width="96" height="96"></img>
-      <p>{name}</p>
+    <Card onClick={() => fetchPokemonData() && handleClickHidden()}>
+      <img src={image} alt={`${name}`}></img>
+      <p>{_.startCase(name)}</p>
+      {!hidden ? (
+        <PokemonInfo base_experience={pokemonData.base_experience} />
+      ) : null}
     </Card>
   );
 };

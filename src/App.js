@@ -3,12 +3,21 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import Pokemon from "./Pokemon";
-import "./App.css";
 import styled from "styled-components";
+import { Title } from "./styles/components";
 
-const Title = styled.h1`
-  color: #333;
-  font-size: 32px;
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Press Start 2P", cursive;
+  height: 100%;
+  width: 100%;
+`;
+
+const Pokedex = styled.div`
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
 `;
 
 const App = () => {
@@ -32,7 +41,7 @@ const App = () => {
     fetchPokemons();
   }, []);
 
-  // using a different api to fetch the pokemon art
+  // fetching the pokemon sprite individually
   const fetchPokemonImage = (index) => {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
       index + 1
@@ -40,19 +49,20 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <Container>
       <Title>Pokédex</Title>
 
-      <div>
+      <Pokedex>
         {pokemons.map((idx, val) => (
           <Pokemon
             key={idx.url}
-            name={idx.name.toUpperCase()}
+            name={idx.name}
             image={fetchPokemonImage(val)}
+            url={idx.url}
           />
         ))}
-      </div>
-    </div>
+      </Pokedex>
+    </Container>
   );
 };
 
