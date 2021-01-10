@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import axios from "axios";
+
 import styled from "styled-components";
 
 const Info = styled.div`
@@ -12,14 +14,38 @@ const Info = styled.div`
   width: 200px;
 `;
 
-const PokemonInfo = ({ base_experience, name, height, weight, stats }) => {
+const PokemonInfo = ({ url, name }) => {
+  const [pokemonData, setPokemonData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchPokemonData = async () => {
+      try {
+        const response = await axios.get(url);
+        setLoading(true);
+        setPokemonData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchPokemonData();
+
+    return () => {
+      setPokemonData([]);
+    };
+  }, []);
+
   return (
     <Info>
       <p>Name: {name}</p>
-      <p>Height: {height}</p>
-      <p>Weight: {weight}</p>
-      <p>Base experience:{base_experience}</p>
-      <p>{stats.map((stat) => stat.base_stat)}</p>
+      <p>Height: {pokemonData.height}</p>
+      <p>Weight: {pokemonData.weight}</p>
+      <p>Base experience:{pokemonData.base_experience}</p>
+      <p>
+        Stats:
+        {pokemonData.stats && pokemonData.stats.map((idx) => idx.base_stat)}
+      </p>
     </Info>
   );
 };
