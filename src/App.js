@@ -3,8 +3,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import Pokemon from "./Pokemon";
+import Footer from "./Footer";
 import styled from "styled-components";
 import { Title } from "./styles/components";
+
+// using lodash for startCase method (uppercasing first letter and removing punctuation)
+var _ = require("lodash");
 
 const Container = styled.div`
   display: flex;
@@ -56,12 +60,13 @@ const App = () => {
         {pokemons.map((idx, val) => (
           <Pokemon
             key={idx.url}
-            name={idx.name}
+            name={_.startCase(idx.name)}
             image={fetchPokemonImage(val)}
             url={idx.url}
           />
         ))}
       </Pokedex>
+      <Footer />
     </Container>
   );
 };
