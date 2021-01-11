@@ -63,6 +63,7 @@ const App = () => {
             name={_.startCase(idx.name)}
             image={fetchPokemonImage(val)}
             url={idx.url}
+            num={val + 1}
           />
         ))}
       </Pokedex>

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import PokemonInfo from "./PokemonInfo";
 
 import { Card } from "./styles/components";
 
-const Pokemon = ({ name, url, image }) => {
+const Pokemon = ({ name, url, image, num }) => {
   const [loading, setLoading] = useState(false);
   const [hidden, setHidden] = useState(true);
 
@@ -17,7 +17,9 @@ const Pokemon = ({ name, url, image }) => {
     <Card onClick={() => handleClickHidden()}>
       <img src={image} alt={`${name}`}></img>
       <p>{name}</p>
-      {!hidden ? <PokemonInfo name={name} url={url} image={image} /> : null}
+      {!hidden ? (
+        <PokemonInfo name={name} url={url} image={image} num={num} />
+      ) : null}
     </Card>
   );
 };

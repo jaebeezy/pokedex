@@ -8,10 +8,9 @@ const Info = styled.div`
   background-color: white;
   border: 2px solid blue;
 
-  position: absolute;
-
   z-index: 2;
 
+  position: absolute;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -22,6 +21,8 @@ const Info = styled.div`
     background-color: white;
     padding: 5px 10px 5px 10px;
     text-transform: capitalize;
+    margin: 0.1rem;
+    font-size: 10px;
   }
 
   img {
@@ -31,16 +32,18 @@ const Info = styled.div`
 
   p {
     text-transform: capitalize;
+    margin: 0.2rem;
   }
 
   div {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0.25rem;
   }
 `;
 
-const PokemonInfo = ({ url, name, image }) => {
+const PokemonInfo = ({ url, name, image, num }) => {
   const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -65,16 +68,16 @@ const PokemonInfo = ({ url, name, image }) => {
   return (
     <Info>
       <div>
-        <p>{name}</p>
         <img src={image} alt={name}></img>
+        <p>#{num}</p>
+        <p>{name}</p>
       </div>
       <div>
         {pokemonData.types &&
           pokemonData.types.map((idx) => {
             return <a key={idx.type.name}>{idx.type.name}</a>;
           })}
-      </div>
-      <div>
+
         <p>Height: {pokemonData.height / 10}m</p>
         <p>Weight: {pokemonData.weight / 10}kg</p>
         <p>Base experience: {pokemonData.base_experience}</p>
@@ -89,8 +92,6 @@ const PokemonInfo = ({ url, name, image }) => {
             );
           })}
       </div>
-
-      {console.log(pokemonData)}
     </Info>
   );
 };

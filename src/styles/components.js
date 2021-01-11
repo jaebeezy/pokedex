@@ -15,8 +15,10 @@ export const Card = styled.div`
   align-items: center;
   flex-direction: column;
 
+  border: 0.5px solid transparent;
+
   &:hover {
-    transform: scale(1.1);
+    border: 0.5px solid black;
     cursor: pointer;
   }
 
@@ -40,5 +42,23 @@ export const Title = styled.h1`
   &:hover {
     transform: scale(1.05);
     cursor: pointer;
+  }
+`;
+
+export const FooterContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 10vh;
+
+  animation: 0.7s ${fadeIn} ease-in;
+
+  &:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+  p {
+    font-size: 6px;
   }
 `;

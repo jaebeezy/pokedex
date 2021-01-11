@@ -1,17 +1,6 @@
 import React from "react";
 
-import styled from "styled-components";
-
-const FooterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 10vh;
-
-  p {
-    font-size: 6px;
-  }
-`;
+import { FooterContainer } from "./styles/components";
 
 const Footer = () => {
   return (
