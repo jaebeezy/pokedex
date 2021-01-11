@@ -66,6 +66,7 @@ const App = () => {
           />
         ))}
       </Pokedex>
+
       <Footer />
     </Container>
   );

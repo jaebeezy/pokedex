@@ -17,7 +17,7 @@ const Pokemon = ({ name, url, image }) => {
     <Card onClick={() => handleClickHidden()}>
       <img src={image} alt={`${name}`}></img>
       <p>{name}</p>
-      {!hidden ? <PokemonInfo name={name} url={url} /> : null}
+      {!hidden ? <PokemonInfo name={name} url={url} image={image} /> : null}
     </Card>
   );
 };
