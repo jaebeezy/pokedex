@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 const fadeIn = keyframes`
   0% {
@@ -18,7 +18,6 @@ export const Card = styled.div`
   border: 0.5px solid transparent;
 
   &:hover {
-    border: 0.5px solid black;
     cursor: pointer;
   }
 
@@ -29,9 +28,13 @@ export const Card = styled.div`
   img {
     width: 96px;
     height: 96px;
+
+    &:hover {
+      transform: scale(1.15);
+    }
   }
 
-  animation: 1.4s ${fadeIn} ease-in;
+  animation: 0.5s ${fadeIn} ease-in;
 `;
 
 export const Title = styled.h1`
@@ -61,4 +64,34 @@ export const FooterContainer = styled.div`
   p {
     font-size: 6px;
   }
+`;
+
+const typeColor = {
+  fire: "#fd7d25",
+  water: "#4492C4",
+  grass: "#9BCC50",
+  poison: "#B97FC9",
+  bug: "#729F3F",
+  normal: "#A4ACAF",
+  ground: "#AB9842",
+  flying: "#96d6e8",
+  fairy: "#FDB9E9",
+  fighting: "#D56723",
+  rock: "#dbaa76",
+  psychic: "#F366B9",
+  electric: "#EED536",
+  steel: "#9FB7B8",
+  ice: "#51C4E7",
+  ghost: "#7B62A3",
+  dragon: "#F16E57",
+};
+
+export const Type = styled.a`
+  border: 1px solid #ececec;
+  border-radius: 10px;
+  background-color: ${({ color }) => typeColor[color] || `${color}`};
+  padding: 5px 10px 5px 10px;
+  text-transform: capitalize;
+  margin: 0.1rem;
+  font-size: 10px;
 `;

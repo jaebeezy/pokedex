@@ -4,6 +4,8 @@ import axios from "axios";
 
 import Pokemon from "./Pokemon";
 import Footer from "./Footer";
+import Spinner from "./Spinner";
+
 import styled from "styled-components";
 import { Title } from "./styles/components";
 
@@ -26,7 +28,7 @@ const Pokedex = styled.div`
 
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // fetching all 151 pokemons from pokeapi
@@ -36,7 +38,7 @@ const App = () => {
           "https://pokeapi.co/api/v2/pokemon?limit=151/"
         );
         // loading is done once the data is returned
-        setLoading(true);
+        setLoading(false);
         setPokemons(response.data.results);
       } catch (error) {
         console.log(error);
@@ -56,17 +58,21 @@ const App = () => {
     <Container>
       <Title>Pokédex</Title>
 
-      <Pokedex>
-        {pokemons.map((idx, val) => (
-          <Pokemon
-            key={idx.url}
-            name={_.startCase(idx.name)}
-            image={fetchPokemonImage(val)}
-            url={idx.url}
-            num={val + 1}
-          />
-        ))}
-      </Pokedex>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Pokedex>
+          {pokemons.map((idx, val) => (
+            <Pokemon
+              key={idx.url}
+              name={_.startCase(idx.name)}
+              image={fetchPokemonImage(val)}
+              url={idx.url}
+              num={val + 1}
+            />
+          ))}
+        </Pokedex>
+      )}
 
       <Footer />
     </Container>

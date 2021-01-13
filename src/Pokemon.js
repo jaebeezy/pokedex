@@ -5,7 +5,6 @@ import PokemonInfo from "./PokemonInfo";
 import { Card } from "./styles/components";
 
 const Pokemon = ({ name, url, image, num }) => {
-  const [loading, setLoading] = useState(false);
   const [hidden, setHidden] = useState(true);
 
   // handling hidden components
