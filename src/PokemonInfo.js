@@ -4,32 +4,7 @@ import axios from "axios";
 
 import Spinner from "./Spinner";
 
-import styled from "styled-components";
-import { Type } from "./styles/components";
-
-const Info = styled.div`
-  background-color: white;
-  border: 2px solid blue;
-
-  z-index: 2;
-
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  p {
-    text-transform: capitalize;
-    margin: 0.2rem;
-  }
-
-  div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0.25rem;
-  }
-`;
+import { Type, Info } from "./styles/components";
 
 const PokemonInfo = ({ url, name, image, num }) => {
   const [pokemonData, setPokemonData] = useState([]);
@@ -39,15 +14,15 @@ const PokemonInfo = ({ url, name, image, num }) => {
     const fetchPokemonData = async () => {
       try {
         const response = await axios.get(url);
-
         setPokemonData(response.data);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchPokemonData();
-    setLoading(false);
+
     return () => {
       setPokemonData([]);
     };

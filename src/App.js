@@ -6,25 +6,10 @@ import Pokemon from "./Pokemon";
 import Footer from "./Footer";
 import Spinner from "./Spinner";
 
-import styled from "styled-components";
-import { Title } from "./styles/components";
+import { Title, Container, Pokedex } from "./styles/components";
 
 // using lodash for startCase method (uppercasing first letter and removing punctuation)
 var _ = require("lodash");
-
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  font-family: "Press Start 2P", cursive;
-  height: 100%;
-  width: 100%;
-`;
-
-const Pokedex = styled.div`
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-`;
 
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -38,8 +23,8 @@ const App = () => {
           "https://pokeapi.co/api/v2/pokemon?limit=151/"
         );
         // loading is done once the data is returned
-        setLoading(false);
         setPokemons(response.data.results);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
