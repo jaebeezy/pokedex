@@ -43,7 +43,7 @@ export const Card = styled.div`
 export const Title = styled.h1`
   color: #333;
   font-size: 32px;
-  animation: 0.5s ${fadeIn};
+  animation: 0.8s ${rbAnimation};
 
   &:hover {
     transform: scale(1.05);
@@ -64,8 +64,10 @@ export const FooterContainer = styled.div`
     cursor: pointer;
   }
 
-  p {
+  a {
     font-size: 6px;
+    text-decoration: none;
+    color: black;
   }
 `;
 
@@ -111,6 +113,10 @@ export const Container = styled.div`
 export const Pokedex = styled.div`
   display: grid;
   grid-template-columns: repeat(9, 1fr);
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const bounceAnimation = keyframes`${flipInX}`;
@@ -141,6 +147,16 @@ export const Info = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 0.25rem;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    width: 170px;
+    height: 300px;
+    p {
+      font-size: 7px;
+      margin: 0.1rem;
+    }
   }
 `;
 
