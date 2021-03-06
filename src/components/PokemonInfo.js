@@ -4,7 +4,7 @@ import axios from "axios";
 
 import Spinner from "./Spinner";
 
-import { Type, Info } from "./styles/components";
+import { Type, Info } from "../styles/components";
 
 const PokemonInfo = ({ url, name, image, num }) => {
   const [pokemonData, setPokemonData] = useState([]);

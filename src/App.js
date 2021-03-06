@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 
-import Pokemon from "./Pokemon";
-import Footer from "./Footer";
-import Spinner from "./Spinner";
+import Pokemon from "./components/Pokemon";
+import Footer from "./components/Footer";
+import Spinner from "./components/Spinner";
 
 import { Title, Container, Pokedex } from "./styles/components";
 
