@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 
 import axios from "axios";
 
@@ -14,6 +14,7 @@ var _ = require("lodash");
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
+  const openPokemonRef = useRef(new Set());
 
   useEffect(() => {
     // fetching all 151 pokemons from pokeapi
@@ -30,6 +31,20 @@ const App = () => {
       }
     };
     fetchPokemons();
+  }, []);
+
+  // this is to track how many pokemon are currently open on the page
+  // this can be used to dynamically calculate an appropriate z-index
+  // value to ensure the most recent pokemon is at the top
+  const openPokemon = useCallback((pokeNumber) => {
+    const set = openPokemonRef.current;
+    if (set.has(pokeNumber)) {
+      set.delete(pokeNumber);
+    } else {
+      set.add(pokeNumber);
+    }
+
+    return set.size;
   }, []);
 
   // fetching the pokemon sprite individually
@@ -54,6 +69,7 @@ const App = () => {
               image={fetchPokemonImage(val)}
               url={idx.url}
               num={val + 1}
+              onOpenClose={openPokemon}
             />
           ))}
         </Pokedex>

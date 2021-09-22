@@ -124,7 +124,7 @@ const bounceAnimation = keyframes`${flipInX}`;
 export const Info = styled.div`
   background-color: white;
 
-  z-index: 2;
+  z-index: ${(props) => props.order};
 
   position: absolute;
   display: flex;

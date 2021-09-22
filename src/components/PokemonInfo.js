@@ -6,7 +6,7 @@ import Spinner from "./Spinner";
 
 import { Type, Info } from "../styles/components";
 
-const PokemonInfo = ({ url, name, image, num }) => {
+const PokemonInfo = ({ url, name, image, num, order }) => {
   const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -29,7 +29,7 @@ const PokemonInfo = ({ url, name, image, num }) => {
   }, [url]);
 
   return (
-    <Info>
+    <Info order={order}>
       <div>
         <img src={image} alt={name}></img>
         <p>#{num}</p>

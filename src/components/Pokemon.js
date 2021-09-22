@@ -4,12 +4,15 @@ import PokemonInfo from "./PokemonInfo";
 
 import { Card } from "../styles/components";
 
-const Pokemon = ({ name, url, image, num }) => {
+const Pokemon = ({ name, url, image, num, onOpenClose }) => {
   const [hidden, setHidden] = useState(true);
+  const [orderOpened, setOrderOpened] = useState(1);
 
   // handling hidden components
   const handleClickHidden = () => {
     setHidden(!hidden);
+    const numberOpen = onOpenClose(num);
+    setOrderOpened(numberOpen);
   };
 
   return (
@@ -22,7 +25,13 @@ const Pokemon = ({ name, url, image, num }) => {
       ></img>
       <p>{name}</p>
       {!hidden ? (
-        <PokemonInfo name={name} url={url} image={image} num={num} />
+        <PokemonInfo
+          name={name}
+          url={url}
+          image={image}
+          num={num}
+          order={orderOpened}
+        />
       ) : null}
     </Card>
   );
