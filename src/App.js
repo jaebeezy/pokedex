@@ -14,22 +14,24 @@ var _ = require("lodash");
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const openPokemonRef = useRef(new Set());
 
+  // fetching all 151 pokemons from pokeapi
+  const fetchPokemons = async () => {
+    try {
+      const response = await axios.get(
+        "https://pokeapi.co/api/v2/pokemon?limit=151/"
+      );
+      // loading is done once the data is returned
+      setPokemons(response.data.results);
+      setLoading(false);
+    } catch (error) {
+      setError(true);
+    }
+  };
+
   useEffect(() => {
-    // fetching all 151 pokemons from pokeapi
-    const fetchPokemons = async () => {
-      try {
-        const response = await axios.get(
-          "https://pokeapi.co/api/v2/pokemon?limit=151/"
-        );
-        // loading is done once the data is returned
-        setPokemons(response.data.results);
-        setLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     fetchPokemons();
   }, []);
 
@@ -59,7 +61,11 @@ const App = () => {
       <Title>Pokédex</Title>
 
       {loading ? (
-        <Spinner />
+        error ? (
+          <button onClick={() => fetchPokemons()}>Refetch</button>
+        ) : (
+          <Spinner />
+        )
       ) : (
         <Pokedex>
           {pokemons.map((idx, val) => (
