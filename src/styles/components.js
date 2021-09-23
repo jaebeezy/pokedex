@@ -108,6 +108,7 @@ export const Container = styled.div`
   font-family: "Press Start 2P", cursive;
   height: 100%;
   width: 100%;
+  user-select: none;
 `;
 
 export const Pokedex = styled.div`

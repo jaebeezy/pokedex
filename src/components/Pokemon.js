@@ -24,7 +24,7 @@ const Pokemon = ({ name, url, image, num, onOpenClose }) => {
         onKeyPress={() => handleClickHidden()}
       ></img>
       <p>{name}</p>
-      {!hidden ? (
+      {!hidden && (
         <PokemonInfo
           name={name}
           url={url}
@@ -32,7 +32,7 @@ const Pokemon = ({ name, url, image, num, onOpenClose }) => {
           num={num}
           order={orderOpened}
         />
-      ) : null}
+      )}
     </Card>
   );
 };
